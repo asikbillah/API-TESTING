@@ -1,0 +1,1 @@
+newman run batch20dynamic.postman_collection.json -e dynamic.postman_environment.json -r cli,htmlextra

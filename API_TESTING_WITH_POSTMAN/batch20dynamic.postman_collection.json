@@ -1,0 +1,356 @@
+{
+	"info": {
+		"_postman_id": "b6e3b959-2ffb-4e5b-977c-ca6f143f676a",
+		"name": "batch20dynamic",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29102039",
+		"_collection_link": "https://blue-space-873979.postman.co/workspace/Asik~b02a290d-46c3-4028-95c7-fb66b7a5e6e1/collection/29102039-b6e3b959-2ffb-4e5b-977c-ca6f143f676a?action=share&source=collection_link&creator=29102039"
+	},
+	"item": [
+		{
+			"name": "Create Booking",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"/*\r",
+							"var firstName = pm.variables.replaceIn(\"{{$randomFirstName}}\")\r",
+							"console.log(\"First Name value: \"+firstName)\r",
+							"pm.environment.set(\"firstName\", firstName)\r",
+							"\r",
+							"var lastName = pm.variables.replaceIn(\"{{$randomLastName}}\")\r",
+							"console.log(\"Last Name value: \"+lastName)\r",
+							"pm.environment.set(\"lastName\", lastName)\r",
+							"\r",
+							"\r",
+							"var totalPrice = pm.variables.replaceIn(\"{{$randomInt}}\")\r",
+							"console.log(\"total price : \"+totalPrice)\r",
+							"pm.environment.set(\"totalPrice\", totalPrice)\r",
+							"\r",
+							"var depositpaid = pm.variables.replaceIn(\"{{$randomBoolean}}\")\r",
+							"console.log(\"total deposid : \"+depositpaid)\r",
+							"pm.environment.set(\"depositpaid\", depositpaid)\r",
+							"\r",
+							"const moment = require(\"moment\")\r",
+							"const today = moment()\r",
+							"console.log(today.format(\"YYYY-MM-DD\"))\r",
+							"pm.environment.set(\"checkin\", today.add(5, 'd').format(\"YYYY-MM-DD\"))\r",
+							"\r",
+							"const out = moment(\"2023-12-1\")\r",
+							"console.log(out.format(\"YYYY-MM-DD\"))\r",
+							"pm.environment.set(\"checkout\", out.format(\"YYYY-MM-DD\"))\r",
+							"\r",
+							"\r",
+							"var additionalneed = pm.variables.replaceIn(\"{{$randomCommonFileType}}\")\r",
+							"console.log(\"additional need : \"+additionalneed)\r",
+							"pm.environment.set(\"additionalneed\", additionalneed)\r",
+							"*/\r",
+							"//First_Name\r",
+							"var firstName = pm.variables.replaceIn(\"{{$randomFirstName}}\")\r",
+							"console.log(\"First Name is: \"+firstName)\r",
+							"pm.environment.set(\"Firstname\" , firstName)\r",
+							"\r",
+							"//Last_Name\r",
+							"var lastName = pm.variables.replaceIn(\"{{$randomLastName}}\")\r",
+							"console.log(\"Last Name is: \"+lastName)\r",
+							"pm.environment.set(\"Lastname\" , lastName)\r",
+							"\r",
+							"//Random Price\r",
+							"var totalPrice = pm.variables.replaceIn(\"{{$randomInt}}\")\r",
+							"pm.environment.set(\"TotalPrice\" , totalPrice)\r",
+							"\r",
+							"//Random Boolean for depositpaid\r",
+							"\r",
+							"var randomBoolean = pm.variables.replaceIn(\"{{$randomBoolean}}\")\r",
+							"pm.environment.set(\"BooleanValue\" , randomBoolean)\r",
+							"\r",
+							"\r",
+							"//For Date\r",
+							"const moment = require(\"moment\")\r",
+							"const today = moment()\r",
+							"console.log(today.format(\"YYYY-MM-DD\"))\r",
+							"console.log(today.add(5, 'd').format(\"YYYY-MM-DD\"))\r",
+							"\r",
+							"pm.environment.set(\"checkIn\", today.format(\"YYYY-MM-DD\"))\r",
+							"pm.environment.set(\"checkOut\", today.add(5,'d').format(\"YYYY-MM-DD\"))\r",
+							"\r",
+							"\r",
+							"//Random_Product\r",
+							"var additionalNeed = pm.variables.replaceIn(\"{{$randomProduct}}\")\r",
+							"console.log(\"additional need: \"+additionalNeed)\r",
+							"pm.environment.set(\"AdditionalNeed\", additionalNeed)\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"/*var jsonData = pm.response.json()\r",
+							"pm.environment.set(\"id\" , jsonData.bookingid)\r",
+							"*/\r",
+							"var jsonData = pm.response.json()\r",
+							"pm.environment.set(\"id\" , jsonData.bookingid)\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "/*{\r\n    \"firstname\": \"{{firstName}}\",\r\n    \"lastname\": \"{{lastName}}\",\r\n    \"totalprice\": {{totalPrice}},\r\n    \"depositpaid\": {{depositPaid}},\r\n    \"bookingdates\": {\r\n        \"checkin\": \"{{todayDate}}\",\r\n        \"checkout\": \"{{todayDate}}\"\r\n    },\r\n    \"additionalneeds\": \"{{additionalNeeds}}\"\r\n}*/\r\n{\r\n\t\"firstname\" : \"{{Firstname}}\",\r\n\t\"lastname\" : \"{{Lastname}}\",\r\n\t\"totalprice\" : {{TotalPrice}},\r\n\t\"depositpaid\" : {{BooleanValue}},\r\n\t\"bookingdates\" : {\r\n    \t\"checkin\" : \"{{checkIn}}\",\r\n    \t\"checkout\" : \"{{checkOut}}\"\r\n\t},\r\n\t\"additionalneeds\" : \"{{AdditionalNeed}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_url}}/booking/",
+					"host": [
+						"{{Base_url}}"
+					],
+					"path": [
+						"booking",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Booking",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var statuscode = pm.response.code\r",
+							"console.log(statuscode)\r",
+							"\r",
+							"if(statuscode==200){\r",
+							"var jsonData = pm.response.json()\r",
+							"\r",
+							"pm.test(\"check Status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"firstname validation\", function(){\r",
+							"    pm.expect(jsonData.firstName).to.eql(pm.environment.get(\"firstName\"))\r",
+							"})\r",
+							"\r",
+							"pm.test(\"lastname validation\", function(){\r",
+							"    pm.expect(jsonData.lastName).to.eql(pm.environment.get(\"lastName\"))\r",
+							"})\r",
+							"pm.test(\"totalprice test\", function(){\r",
+							"    pm.expect(jsonData.totalPrice).to.eql(pm.environment.get(\"totalPrice\"))\r",
+							"})\r",
+							"pm.test(\"deposite test\", function(){\r",
+							"    pm.expect(jsonData.depositPaid).to.eql(pm.environment.get(\"depositPaid\"))\r",
+							"})\r",
+							"\r",
+							"pm.test(\"CheckIN\", function(){\r",
+							"    pm.expect(jsonData.bookingdates.checkin).to.eql(pm.environment.get(\"checkIn\"))\r",
+							"})\r",
+							"pm.test(\"checkOut\", function(){\r",
+							"    pm.expect(jsonData.bookingdates.checkout).to.eql(pm.environment.get(\"checkOut\"))\r",
+							"})\r",
+							"pm.test(\"Additional Needs\", function(){\r",
+							"    pm.expect(jsonData.additionalNeed).to.eql(pm.environment.get(\"additionalNeed\"))\r",
+							"})\r",
+							"\r",
+							"}\r",
+							"else if(statuscode==404){\r",
+							"    pm.test(\"NOT FOUND\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"}else if(statuscode==403){\r",
+							"    pm.test(\"FORBIDDEN\", function(){\r",
+							"        pm.response.to.have.status(403);\r",
+							"    })\r",
+							"}\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Base_url}}/booking/{{id}}",
+					"host": [
+						"{{Base_url}}"
+					],
+					"path": [
+						"booking",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var Data = pm.response.json()\r",
+							"pm.environment.set(\"tokenid\", Data.token)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\" : \"admin\",\r\n    \"password\" : \"password123\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_url}}/auth",
+					"host": [
+						"{{Base_url}}"
+					],
+					"path": [
+						"auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Booking",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var firstName = pm.variables.replaceIn(\"{{$randomFirstName}}\")\r",
+							"console.log(\"First Name is: \"+firstName)\r",
+							"pm.environment.set(\"Firstname\" , firstName)\r",
+							"\r",
+							"//Last_Name\r",
+							"var lastName = pm.variables.replaceIn(\"{{$randomLastName}}\")\r",
+							"console.log(\"Last Name is: \"+lastName)\r",
+							"pm.environment.set(\"Lastname\" , lastName)\r",
+							"\r",
+							"//Random Price\r",
+							"var totalPrice = pm.variables.replaceIn(\"{{$randomInt}}\")\r",
+							"pm.environment.set(\"TotalPrice\" , totalPrice)\r",
+							"\r",
+							"//Random Boolean for depositpaid\r",
+							"\r",
+							"var randomBoolean = pm.variables.replaceIn(\"{{$randomBoolean}}\")\r",
+							"pm.environment.set(\"BooleanValue\" , randomBoolean)\r",
+							"\r",
+							"\r",
+							"//For Date\r",
+							"const moment = require(\"moment\")\r",
+							"const today = moment()\r",
+							"console.log(today.format(\"YYYY-MM-DD\"))\r",
+							"console.log(today.add(5, 'd').format(\"YYYY-MM-DD\"))\r",
+							"\r",
+							"pm.environment.set(\"checkIn\", today.format(\"YYYY-MM-DD\"))\r",
+							"pm.environment.set(\"checkOut\", today.add(5,'d').format(\"YYYY-MM-DD\"))\r",
+							"\r",
+							"\r",
+							"//Random_Product\r",
+							"var additionalNeed = pm.variables.replaceIn(\"{{$randomProduct}}\")\r",
+							"console.log(\"additional need: \"+additionalNeed)\r",
+							"pm.environment.set(\"AdditionalNeed\", additionalNeed)\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "token={{tokenid}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"firstname\" : \"{{Firstname}}\",\r\n\t\"lastname\" : \"{{Lastname}}\",\r\n\t\"totalprice\" : {{TotalPrice}},\r\n\t\"depositpaid\" : {{BooleanValue}},\r\n\t\"bookingdates\" : {\r\n    \t\"checkin\" : \"{{checkIn}}\",\r\n    \t\"checkout\" : \"{{checkOut}}\"\r\n\t},\r\n\t\"additionalneeds\" : \"{{AdditionalNeed}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_url}}/booking/{{id}}",
+					"host": [
+						"{{Base_url}}"
+					],
+					"path": [
+						"booking",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "token={{tokenid}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{Base_url}}/booking/{{id}}",
+					"host": [
+						"{{Base_url}}"
+					],
+					"path": [
+						"booking",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
